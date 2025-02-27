@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Jersey+10&family=Jersey+25&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/addItem.css">
+    <title>BuyIT</title>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <span class="title_purple">Buy</span>IT
+        </div>
+
+        <div class="input">
+            <input type="text" id="itemName" placeholder="Termék neve">
+        </div>
+
+
+<select id="itemCategory" name="itemCategory">
+    <option value="">Termék kategóriája</option>
+    <option value="Mobiltelefon">Mobiltelefon</option>
+    <option value="Tablet">Tablet</option>
+    <option value="Okosóra">Okosóra</option>
+    <option value="Laptop">Laptop</option>
+</select>
+
+        <div class="input">
+            <input type="number" id="itemPrice" placeholder="Termék ára (FT)">
+        </div>
+
+        <div class="input">
+            <input type="number" id="stock" placeholder="Raktár">
+        </div>
+
+        <main>
+            <div class="edit-pic">
+                <label for="fileUpload">
+                    Termék képe
+                </label>
+                <input type="file" id="fileUpload">
+            </div>
+        </main>
+
+        <div class="add">
+            <button type="button" id="btnAdd">Termék hozzáadása</button>
+        </div>
+        <script src="./js/addItem.js"></script>
+</body>
+</html>

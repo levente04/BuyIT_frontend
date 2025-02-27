@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Jersey+10&family=Jersey+25&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    
+    <title>BuyIt</title>
+    <link rel="stylesheet" href="./css/home.css">
+</head>
+
+<body id="header">
+    
+    <header>
+        
+        <div class="menu-logo">
+            <span class="menu-logo-purple">Buy</span>IT
+        </div>
+
+        <div class="search-container">
+            <form action="">
+                <input type="text" placeholder="Termék keresése.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+                <div class="dropdown">
+                    <button class="dropdown-button"><i class="fa-solid fa-bars"></i></button>
+                    <div class="dropdown-content">
+                      <a href="#" class="phones">Telefonok</a>
+                      <a href="#" class="tablets">Tabletek</a>
+                      <a href="#" class="laptops">Laptopok</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <nav>
+
+            <a href="#" class="icon-admin">
+                <i class="fa-solid fa-user-shield"></i>
+            </a>
+
+            <a href="#" class="icon-basket">
+                <i class="fa-solid fa-basket-shopping" id="cartIcon"></i>
+                <span id="cartCount" style="display: none;">0</span>
+                <span id="cartAlert" style="display: none; color: purple; font-weight: bold;">❗</span>
+            </a>
+            
+
+            <a href="#" class="icon-profile">
+                <i class="fa-solid fa-user"></i>
+                <span class="belepes-text">Belépés</span>
+            </a>
+ 
+            <div id="logoutModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>Biztosan ki akarsz jelentkezni?</p>
+                    <button id="confirmLogout">Igen, kijelentkezek</button>
+                    <button id="cancelLogout">Vissza</button>
+                </div>
+        </nav>
+
+    </header>
+<h1 class="page-title">Összes termék</h1>
+    <main class="container">
+        <div class="row">
+        </div>
+    </main>
+    <script src="./js/home.js"></script>
+</body>
+
+</html>

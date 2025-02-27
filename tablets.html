@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Jersey+10&family=Jersey+25&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>BuyIT</title>
+    <link rel="stylesheet" href="./css/tablets.css">
+</head>
+
+<body>
+
+    <header>
+        
+        <div class="menu-logo">
+            <span class="menu-logo-purple">Buy</span>IT
+        </div>
+
+        <div class="search-container">
+            <form action="">
+                <input type="text" placeholder="Termék keresése.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+                <div class="dropdown">
+                    <button class="dropdown-button"><i class="fa-solid fa-bars"></i></button>
+                    <div class="dropdown-content">
+                      <a href="#" class="phones">Telefonok</a>
+                      <a href="#">Tabletek</a>
+                      <a href="#" class="laptops">Laptopok</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <nav>
+
+            <a href="#" class="icon-admin">
+                <i class="fa-solid fa-user-shield"></i>
+            </a>
+
+            <a href="#" class="icon-basket">
+                <i class="fa-solid fa-basket-shopping"></i>
+            </a>
+
+            <a href="#" class="icon-profile">
+                <i class="fa-solid fa-user"></i>
+                <span class="login-sign-purple">Belépés</span>
+            </a>
+ 
+            
+        </nav>
+
+    </header>
+
+    <div class="container">
+        <h1>Tabletek</h1>
+        
+        <div class="row">
+            
+            <div class="product">
+                <img src="images/iPadAir.jpg" alt="iPhone16Pro">
+                <h1 class="productName">iPad Air</h1>
+                <p class="price">524 990 Ft</p>
+                <p><button>Kosárba</button></p>
+            </div>
+
+            <div class="product">
+                <img src="images/iPadAir.jpg" alt="iPhone16Pro">
+                <h1 class="productName">iPad Air</h1>
+                <p class="price">524 990 Ft</p>
+                <p><button>Kosárba</button></p>
+            </div>
+
+            <div class="product">
+                <img src="images/iPadAir.jpg" alt="iPhone16Pro">
+                <h1 class="productName">iPad Air</h1>
+                <p class="price">524 990 Ft</p>
+                <p><button>Kosárba</button></p>
+            </div>
+
+            <div class="product">
+                <img src="images/iPadAir.jpg" alt="iPhone16Pro">
+                <h1 class="productName">iPad Air</h1>
+                <p class="price">524 990 Ft</p>
+                <p><button>Kosárba</button></p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="./js/tablets.js"></script>
+
+</body>
+
+</html>

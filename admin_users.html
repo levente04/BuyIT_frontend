@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="hu">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Jersey+10&family=Jersey+25&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+            integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>BuyIT</title>
+        <link rel="stylesheet" href="./css/admin_users.css">
+    </head>
+
+<body>
+    
+    <header>
+        
+        <div class="menu-logo">
+            <span class="menu-logo-purple">Buy</span>IT
+        </div>
+
+        <div class="search-container">
+            <form action="">
+                <input type="text" placeholder="Termék keresése.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+                <div class="dropdown">
+                    <button class="dropdown-button"><i class="fa-solid fa-bars"></i></button>
+                    <div class="dropdown-content">
+                      <a href="#">Telefonok</a>
+                      <a href="#">Tabletek</a>
+                      <a href="#">Laptopok</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <nav>
+
+            <a href="" class="icon-admin">
+                <i class="fa-solid fa-user-shield"></i>
+            </a>
+
+            <a href="" class="icon-basket">
+                <i class="fa-solid fa-basket-shopping"></i>
+            </a>
+
+            <a href="" class="icon-profile">
+                <i class="fa-solid fa-user"></i>
+                <span class="login-sign-purple">Admin</span>
+            </a>
+ 
+            
+        </nav>
+
+    </header>
+
+    <div class="container"> 
+
+        <h1>Felhasználók</h1>
+    
+        <table>
+        
+            <tr>
+                <th class="name">Név</th>
+                <th class="email">Email cím</th>
+                <th class="orders">Rendelések</th>
+                <th class="details"></th>
+            </tr>
+
+            <tr>
+                <td class="name">Kiss Béla</td>
+                <td class="email">kisbela@mail.hu</td>
+                <td><button type="button" id="btnmanage">Kezel</button></td>
+                <td><button type="button" id="btndetails">Részletek</button></td>
+                <td><button type="button" id="btndeluser">Felhasználó törlése</button></td>
+            </tr>
+        
+            <tr>
+                <td class="name">Nagy István</td>
+                <td class="email">nagyistvan@mail.hu</td>
+                <td><button type="button" id="btnmanage">Kezel</button></td>
+                <td><button type="button" id="btndetails">Részletek</button></td>
+                <td><button type="button" id="btndeluser">Felhasználó törlése</button></td>
+                </tr>
+
+                <tr>
+                    <td class="name">Kerekes Péter</td>
+                    <td class="email">kerekespeter@mail.hu</td>
+                    <td><button type="button" id="btnmanage">Kezel</button></td>
+                    <td><button type="button" id="btndetails">Részletek</button></td>
+                    <td><button type="button" id="btndeluser">Felhasználó törlése</button></td>
+                </tr>
+
+                <tr>
+                    <td class="name">Szabó Adél</td>
+                    <td class="email">szaboadel@mail.hu</td>
+                    <td><button type="button" id="btnmanage">Kezel</button></td>
+                    <td><button type="button" id="btndetails">Részletek</button></td>
+                    <td><button type="button" id="btndeluser">Felhasználó törlése</button></td>
+                </tr>
+
+                <tr>
+                    <td class="name">Vass Attila</td>
+                    <td class="email">vassattila@mail.hu</td>
+                    <td><button type="button" id="btnmanage">Kezel</button></td>
+                    <td><button type="button" id="btndetails">Részletek</button></td>
+                    <td><button type="button" id="btndeluser">Felhasználó törlése</button></td>
+                </tr>
+
+                <tr>
+                    <td class="name">Lengyel Éva</td>
+                    <td class="email">lengyeleva@mail.hu</td>
+                    <td><button type="button" id="btnmanage">Kezel</button></td>
+                    <td><button type="button" id="btndetails">Részletek</button></td>
+                    <td><button type="button" id="btndeluser">Felhasználó törlése</button></td>
+                </tr>
+
+        </table>
+
+    </div>
+
+    
+
+
+    <script src="./js/admin_users.js"></script>
+
+</body>
+</html>
