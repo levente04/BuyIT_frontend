@@ -31,7 +31,7 @@ btnaddproduct.addEventListener('click', () => {
 
 document.addEventListener("DOMContentLoaded", async function () {
     try {
-        let response = await fetch('http://localhost:3000/api/usercount')
+        let response = await fetch('/api/usercount')
         let data = await response.json()
 
         if (response.ok) {

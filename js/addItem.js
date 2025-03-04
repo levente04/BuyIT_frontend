@@ -20,7 +20,7 @@ document.getElementById('btnAdd').addEventListener('click', async () => {
     formData.append('image', imageFile);
 
     try {
-        const response = await fetch('http://localhost:3000/api/addItem', {
+        const response = await fetch('/api/addItem', {
             method: 'POST',
             body: formData,
             credentials: 'include'

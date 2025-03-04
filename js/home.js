@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     let isLoggedIn = false;
 
     try {
-        const response = await fetch('http://localhost:3000/api/getUsername', {
+        const response = await fetch('/api/getUsername', {
             method: 'GET',
             credentials: 'include'
         });
@@ -80,7 +80,7 @@ function showLoginPrompt() {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    fetch('http://localhost:3000/api/getRole', {
+    fetch('/api/getRole', {
         method: 'GET',
         credentials: 'include', // Include the authentication cookie
     })
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     try {
         // Fetch the username to check if the user is logged in
-        const response = await fetch('http://localhost:3000/api/getUsername', {
+        const response = await fetch('/api/getUsername', {
             method: 'GET',
             credentials: 'include'
         });
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }).then(async (result) => {
                     if (result.isConfirmed) {
                         try {
-                            const logoutResponse = await fetch('http://localhost:3000/api/logout', {
+                            const logoutResponse = await fetch('/api/logout', {
                                 method: 'POST',
                                 credentials: 'include',
                             });
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const productsContainer = document.querySelector(".row");
 
     try {
-        const response = await fetch("http://localhost:3000/api/getProducts");
+        const response = await fetch("/api/getProducts");
         const products = await response.json();
 
         productsContainer.innerHTML = "";
@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to update cart count from API
     async function updateCartCount() {
         try {
-            const response = await fetch('http://localhost:3000/api/cart/count', {
+            const response = await fetch('/api/cart/count', {
                 method: 'GET',
                 credentials: 'include',
             });
@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const productId = event.target.dataset.id;
 
             try {
-                const response = await fetch('http://localhost:3000/api/cart/add', {
+                const response = await fetch('/api/cart/add', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
@@ -314,7 +314,7 @@ async function updateCartIndicator() {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/api/cart/count/${userId}`, {
+        const response = await fetch(`/api/cart/count/${userId}`, {
             method: 'GET',
             credentials: 'include',
         });

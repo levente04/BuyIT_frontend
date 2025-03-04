@@ -34,7 +34,7 @@ backToHome.addEventListener('click', () => {
 // Consolidate fetching and displaying cart items
 document.addEventListener("DOMContentLoaded", async () => {
     try {
-        const response = await fetch('http://localhost:3000/api/cart/getItems', {
+        const response = await fetch('/api/cart/getItems', {
             credentials: 'include'
         });
 
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     try {
         // Fetch the username to check if the user is logged in
-        const response = await fetch('http://localhost:3000/api/getUsername', {
+        const response = await fetch('/api/getUsername', {
             method: 'GET',
             credentials: 'include'
         });
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }).then(async (result) => {
                     if (result.isConfirmed) {
                         try {
-                            const logoutResponse = await fetch('http://localhost:3000/api/logout', {
+                            const logoutResponse = await fetch('/api/logout', {
                                 method: 'POST',
                                 credentials: 'include',
                             });
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 // Function to handle item removal
 function removeFromCart(product_id) {
-    fetch("http://localhost:3000/api/cart/remove", {
+    fetch("/api/cart/remove", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -202,7 +202,7 @@ function removeItemFromDOM(product_id) {
 
 // Function to update cart summary (total price and count)
 function updateCartSummary() {
-    fetch("http://localhost:3000/api/cart/getItems", {
+    fetch("/api/cart/getItems", {
         credentials: "include"
     })
     .then(response => response.json())
@@ -238,7 +238,7 @@ function updateCartSummary() {
 // Function to display cart items when the page loads
 document.addEventListener("DOMContentLoaded", async () => {
     try {
-        const response = await fetch('http://localhost:3000/api/cart/getItems', {
+        const response = await fetch('/api/cart/getItems', {
             credentials: 'include'
         });
 
@@ -287,7 +287,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 function updateCartCount() {
-    fetch("http://localhost:3000/api/cart/count", { credentials: "include" })
+    fetch("/api/cart/count", { credentials: "include" })
         .then(response => response.json())
         .then(data => {
             const cartCountElement = document.getElementById("cart-count");
@@ -322,7 +322,7 @@ function updateTotalPrice() {
 
 
 function fetchCartItems() {
-    fetch("http://localhost:3000/api/cart/items", {
+    fetch("/api/cart/items", {
         credentials: "include", // Send authentication token if needed
     })
     .then(response => response.json())
@@ -338,7 +338,7 @@ function fetchCartItems() {
 
 document.addEventListener("DOMContentLoaded", async () => {
     try {
-        const response = await fetch('http://localhost:3000/api/cart/getItems', {
+        const response = await fetch('/api/cart/getItems', {
             credentials: 'include'
         });
 
@@ -388,7 +388,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 function removeFromCart(product_id) {
-    fetch("http://localhost:3000/api/cart/remove", {
+    fetch("/api/cart/remove", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
