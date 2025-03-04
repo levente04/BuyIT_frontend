@@ -6,8 +6,8 @@
   headers = {Access-Control-Allow-Origin = "*"}
 
   [[redirects]]
-  from = "/uploads/*"
-  to = "https://nodejs211.dszcbaross.edu.hu/uploads/:splat"
+  from = "/images/*"
+  to = "https://nodejs211.dszcbaross.edu.hu/images/:splat"
   status = 200
   force = true
   headers = {Access-Control-Allow-Origin = "*"}
