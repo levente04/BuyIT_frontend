@@ -346,76 +346,35 @@ async function updateCartIndicator() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const searchForm = document.querySelector(".search-container form");
-    const searchInput = document.querySelector(".search-container input");
+const txttxt = document.getElementById('search1');
+const search_form = document.getElementById('search_form');
 
-    async function searchProducts(event) {
-        event.preventDefault();  // Prevent form submission to stop page reload
-        const query = searchInput.value.trim(); // Get the search input value
-    
-        if (!query) {
-            return; // Don't search if input is empty
-        }
-    
-        try {
-            // Perform search using the query
-            const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+search_form.addEventListener('submit', (event) => {
+    event.preventDefault();
+});
 
-            // Log status for debugging
-            console.log('Response Status:', response.status);
-
-            if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.statusText}`);
-            }
-            
-            const results = await response.json();
-            displaySearchResults(results); // Function to display the search results
-        } catch (error) {
-            console.error("Error searching products:", error);
-        }
-    }
-
-    // Attach only one event listener to the search form
-    searchForm.addEventListener("submit", searchProducts);
+txttxt.addEventListener('input', () => {
+    searchingProduct(txttxt.value);
 });
 
 
-    // Function to display search results
-    function displaySearchResults(products) {
-        productsContainer.innerHTML = ''; // Clear current products
+async function searchingProduct(searchQuery) {
+    console.log(searchQuery);
 
-        if (products.length === 0) {
-            productsContainer.innerHTML = '<p>No products found</p>';
-        }
+    const res = await fetch(`/api/search/${searchQuery}`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: 'include'
+    });
 
-        products.forEach(product => {
-            const productCard = document.createElement("div");
-            productCard.classList.add("card");
+    const data = await res.json();
+    console.log(data);
 
-            productCard.innerHTML = `
-                <div class="card-body">
-                    <div class="pic-div">
-                        <img src="/images/${products.image}" alt="${products.itemName}">
-                    </div>
-                </div>
-                <div class="termek-nev">
-                    <span>${products.itemName}</span>
-                </div>
-                <div class="card-footer">
-                    <span>${products.itemPrice} Ft</span>
-                    <div class="kosar">
-                        <button type="button" class="btnKosar" data-id="${products.product_id}">Kosárba</button>
-                    </div>
-                </div>
-            `;
-            productsContainer.appendChild(productCard);
-        });
-    }
+    renderProducts(data);
 
-    // Attach the search function to the form submission event
-    searchForm.addEventListener("submit", searchProducts);
-
+}
 // Run when page loads
 document.addEventListener("DOMContentLoaded", updateCartIndicator);
 
