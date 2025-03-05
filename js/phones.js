@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const productsContainer = document.querySelector(".row");
 
     try {
-        const response = await fetch("/api/getProducts");
+        const response = await fetch("/api/getPhones");
         const products = await response.json();
 
         productsContainer.innerHTML = "";
