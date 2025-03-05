@@ -334,6 +334,62 @@ async function updateCartIndicator() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const searchForm = document.querySelector(".search-container form");
+    const searchInput = document.querySelector(".search-container input");
+    const productsContainer = document.querySelector(".row");
+
+    async function searchProducts(event) {
+        event.preventDefault(); // Prevent form submission (page reload)
+        
+        const query = searchInput.value.trim();
+        if (query.length === 0) return; // Do nothing if the input is empty
+
+        try {
+            const response = await fetch(`/api/search?q=${query}`);
+            const products = await response.json();
+
+            // Clear existing results
+            productsContainer.innerHTML = "";
+
+            if (products.length === 0) {
+                productsContainer.innerHTML = "<p>Nincs találat.</p>";
+                return;
+            }
+
+            products.forEach(product => {
+                const productCard = document.createElement("div");
+                productCard.classList.add("card");
+
+                productCard.innerHTML = `
+                    <div class="card-body">
+                        <div class="pic-div">
+                            <img src="/images/${product.image}" alt="${product.itemName}">
+                        </div>
+                    </div>
+                    <div class="termek-nev">
+                        <span>${product.itemName}</span>
+                    </div>
+                    <div class="card-footer">
+                        <span>${product.itemPrice} Ft</span>
+                        <div class="kosar">
+                            <button type="button" class="btnKosar" data-id="${product.product_id}">Kosárba</button>
+                        </div>
+                    </div>
+                `;
+
+                productsContainer.appendChild(productCard);
+            });
+        } catch (error) {
+            console.error("Error searching products:", error);
+        }
+    }
+
+    // Trigger search when submitting the form
+    searchForm.addEventListener("submit", searchProducts);
+});
+
+
 // Run when page loads
 document.addEventListener("DOMContentLoaded", updateCartIndicator);
 
