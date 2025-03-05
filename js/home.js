@@ -346,19 +346,20 @@ async function updateCartIndicator() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
     const searchForm = document.querySelector(".search-container form");
     const searchInput = document.querySelector(".search-container input");
     const productsContainer = document.querySelector(".row");
 
+    // Function to handle product search
     async function searchProducts(event) {
         event.preventDefault();
-        const query = document.querySelector("input[name='search']").value;
-    
+        const query = searchInput.value.trim(); // Get the search input value
+        
         if (!query) {
-            return; // If the search input is empty, don't make the request
+            return; // Don't search if input is empty
         }
-    
+
         try {
             const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
             
@@ -372,13 +373,42 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error searching products:", error);
         }
     }
-    
-    document.querySelector("form").addEventListener("submit", searchProducts);
-    
 
+    // Function to display search results
+    function displaySearchResults(products) {
+        productsContainer.innerHTML = ''; // Clear current products
+
+        if (products.length === 0) {
+            productsContainer.innerHTML = '<p>No products found</p>';
+        }
+
+        products.forEach(product => {
+            const productCard = document.createElement("div");
+            productCard.classList.add("card");
+
+            productCard.innerHTML = `
+                <div class="card-body">
+                    <div class="pic-div">
+                        <img src="/images/${product.image}" alt="${product.itemName}">
+                    </div>
+                </div>
+                <div class="termek-nev">
+                    <span>${product.itemName}</span>
+                </div>
+                <div class="card-footer">
+                    <span>${product.itemPrice} Ft</span>
+                    <div class="kosar">
+                        <button type="button" class="btnKosar" data-id="${product.product_id}">Kosárba</button>
+                    </div>
+                </div>
+            `;
+            productsContainer.appendChild(productCard);
+        });
+    }
+
+    // Attach the search function to the form submission event
     searchForm.addEventListener("submit", searchProducts);
 });
-
 
 // Run when page loads
 document.addEventListener("DOMContentLoaded", updateCartIndicator);
