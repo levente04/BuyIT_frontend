@@ -389,16 +389,16 @@ document.addEventListener("DOMContentLoaded", function () {
             productCard.innerHTML = `
                 <div class="card-body">
                     <div class="pic-div">
-                        <img src="/images/${product.image}" alt="${product.itemName}">
+                        <img src="/images/${products.image}" alt="${products.itemName}">
                     </div>
                 </div>
                 <div class="termek-nev">
-                    <span>${product.itemName}</span>
+                    <span>${products.itemName}</span>
                 </div>
                 <div class="card-footer">
-                    <span>${product.itemPrice} Ft</span>
+                    <span>${products.itemPrice} Ft</span>
                     <div class="kosar">
-                        <button type="button" class="btnKosar" data-id="${product.product_id}">Kosárba</button>
+                        <button type="button" class="btnKosar" data-id="${products.product_id}">Kosárba</button>
                     </div>
                 </div>
             `;
