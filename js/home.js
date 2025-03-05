@@ -43,10 +43,22 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // Cart icon click event
     const iconBasket = document.getElementsByClassName('icon-basket')[0];
+
     iconBasket.addEventListener("click", function (event) {
         if (!isLoggedIn) {
             event.preventDefault();
-            showLoginPrompt();  // Show login prompt if user is not logged in
+            Swal.fire({
+                title: "Bejelentkezés szükséges!",
+                text: "A kosár megtekintéséhez először be kell jelentkezned.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Bejelentkezés",
+                cancelButtonText: "Mégse"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = './login.html'; // Redirect to login page
+                }
+            });
         } else {
             window.location.href = './cart.html'; // Proceed if logged in
         }
