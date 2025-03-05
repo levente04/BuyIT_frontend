@@ -10,11 +10,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
         integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>BuyIT</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    
+    <title>BuyIt</title>
     <link rel="stylesheet" href="./css/phones.css">
 </head>
-<body>
 
+<body id="header">
+    
     <header>
         
         <div class="menu-logo">
@@ -28,7 +32,7 @@
                 <div class="dropdown">
                     <button class="dropdown-button"><i class="fa-solid fa-bars"></i></button>
                     <div class="dropdown-content">
-                      <a href="#">Telefonok</a>
+                      <a href="#" class="phones">Telefonok</a>
                       <a href="#" class="tablets">Tabletek</a>
                       <a href="#" class="laptops">Laptopok</a>
                     </div>
@@ -50,61 +54,33 @@
             </a>
 
             <a href="#" class="icon-basket">
-                <i class="fa-solid fa-basket-shopping"></i>
+                <i class="fa-solid fa-basket-shopping" id="cartIcon"></i>
+                <span id="cartCount" style="display: none;">0</span>
+                <span id="cartAlert" style="display: none; color: purple; font-weight: bold;">❗</span>
             </a>
+            
 
             <a href="#" class="icon-profile">
                 <i class="fa-solid fa-user"></i>
-                <span class="login-sign-purple">Belépés</span>
+                <span class="belepes-text">Belépés</span>
             </a>
  
-            
+            <div id="logoutModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>Biztosan ki akarsz jelentkezni?</p>
+                    <button id="confirmLogout">Igen, kijelentkezek</button>
+                    <button id="cancelLogout">Vissza</button>
+                </div>
         </nav>
 
     </header>
-
-    <div class="container">
-        <h1>Telefonok</h1>
-        
+<h1 class="page-title">Telefonok</h1>
+    <main class="container">
         <div class="row">
-            
-            <div class="product">
-                <img src="images/iPhone16Pro.jpg" alt="iPhone16Pro">
-                <h1 class="productName">iPhone 16 Pro</h1>
-                <p class="price">499 990 Ft</p>
-                <p>Some text about the jeans..</p>
-                <p><button>Kosárba</button></p>
-            </div>
-
-            <div class="product">
-                <img src="images/iPhone16Pro.jpg" alt="iPhone16Pro">
-                <h1 class="productName">iPhone 16 Pro</h1>
-                <p class="price">499 990 Ft</p>
-                <p>Some text about the jeans..</p>
-                <p><button>Kosárba</button></p>
-            </div>
-            
-            <div class="product">
-                <img src="images/iPhone16Pro.jpg" alt="iPhone16Pro">
-                <h1 class="productName">iPhone 16 Pro</h1>
-                <p class="price">499 990 Ft</p>
-                <p>Some text about the jeans..</p>
-                <p><button>Kosárba</button></p>
-            </div>
-
-            <div class="product">
-                <img src="images/iPhone16Pro.jpg" alt="iPhone16Pro">
-                <h1 class="productName">iPhone 16 Pro</h1>
-                <p class="price">499 990 Ft</p>
-                <p>Some text about the jeans..</p>
-                <p><button>Kosárba</button></p>
-            </div>
-
         </div>
-
-    </div>
-
+    </main>
     <script src="./js/phones.js"></script>
-
 </body>
+
 </html>
