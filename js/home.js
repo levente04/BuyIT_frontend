@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             productCard.innerHTML = `
                 <div class="card-body">
                     <div class="pic-div">
-                    <img src="http://localhost:3000/images/${products.image}" alt="${products.itemName}">
+                    <img src="/images/${products.image}" alt="${products.itemName}">
                     </div>
                 </div>
                 <div class="termek-nev">

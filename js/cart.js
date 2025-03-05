@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             itemElement.classList.add('cart-item');
             itemElement.innerHTML = `
             <div class="cart-item-content">
-                <img src="http://localhost:3000/images/${item.image}" alt="${item.itemName}" width="100">
+                <img src="/images/${item.image}" alt="${item.itemName}" width="100">
                 <div class="item-details">
                     <p class="item-name">${item.itemName}</p>
                     <p class="item-quantity">${item.quantity} x ${item.itemPrice} Ft</p>
@@ -268,7 +268,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             totalPrice += itemTotalPrice;
 
             itemDiv.innerHTML = `
-                <img src="http://localhost:3000/images/${item.image}" alt="${item.itemName}">
+                <img src="/images/${item.image}" alt="${item.itemName}">
                 <div class="item-details">
                     <p>${item.itemName}</p>
                     <p>${item.quantity} x ${item.itemPrice} Ft</p>
@@ -367,7 +367,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             totalPrice += itemTotalPrice;  // Add the item total price to the overall total
 
             itemDiv.innerHTML = `
-                <img src="http://localhost:3000/images/${item.image}" alt="${item.itemName}">
+                <img src="/images/${item.image}" alt="${item.itemName}">
                 <div class="item-details">
                     <p>${item.itemName}</p>
                     <p>${item.quantity} x ${item.itemPrice} Ft</p>
