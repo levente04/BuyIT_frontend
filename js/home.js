@@ -208,6 +208,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
+    
 
     try {
         const response = await fetch("/api/getProducts");
@@ -220,6 +221,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // Separate function to render the products
 function renderProducts(products) {
+    const productsContainer = document.querySelector(".row");
     productsContainer.innerHTML = ""; // Clear the container
 
     products.forEach(products => {
