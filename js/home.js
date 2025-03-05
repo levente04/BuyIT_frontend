@@ -347,7 +347,7 @@ async function updateCartIndicator() {
 }
 
 const txttxt = document.getElementById('search1');
-const search_form = document.getElementById('search_form');
+const search_form = document.getElementById('search_form')
 
 search_form.addEventListener('submit', (event) => {
     event.preventDefault();
