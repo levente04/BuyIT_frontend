@@ -352,62 +352,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const productsContainer = document.querySelector(".row");
 
     async function searchProducts(event) {
-        event.preventDefault(); // Stop the page from reloading
-        console.log("Search triggered"); // Debugging log
-
-        const query = searchInput.value.trim();
-        if (query.length === 0) {
-            console.log("Empty search query");
-            return;
+        event.preventDefault();
+        const query = document.querySelector("input[name='search']").value;
+    
+        if (!query) {
+            return; // If the search input is empty, don't make the request
         }
-
+    
         try {
-            console.log("Fetching: /api/search?q=" + query);
             const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
             
             if (!response.ok) {
-                throw new Error("Network response was not ok");
+                throw new Error(`Network response was not ok: ${response.statusText}`);
             }
-
-            const products = await response.json();
-            console.log("Search results:", products); // Log results
-
-            // Clear existing products
-            productsContainer.innerHTML = "";
-
-            if (products.length === 0) {
-                productsContainer.innerHTML = "<p>Nincs találat.</p>";
-                return;
-            }
-
-            products.forEach(product => {
-                const productCard = document.createElement("div");
-                productCard.classList.add("card");
-
-                productCard.innerHTML = `
-                    <div class="card-body">
-                        <div class="pic-div">
-                            <img src="/images/${product.image}" alt="${product.itemName}">
-                        </div>
-                    </div>
-                    <div class="termek-nev">
-                        <span>${product.itemName}</span>
-                    </div>
-                    <div class="card-footer">
-                        <span>${product.itemPrice} Ft</span>
-                        <div class="kosar">
-                            <button type="button" class="btnKosar" data-id="${product.product_id}">Kosárba</button>
-                        </div>
-                    </div>
-                `;
-
-                productsContainer.appendChild(productCard);
-            });
-
+            
+            const results = await response.json();
+            displaySearchResults(results); // Function to display the search results
         } catch (error) {
             console.error("Error searching products:", error);
         }
     }
+    
+    document.querySelector("form").addEventListener("submit", searchProducts);
+    
 
     searchForm.addEventListener("submit", searchProducts);
 });
