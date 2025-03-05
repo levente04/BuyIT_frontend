@@ -372,7 +372,7 @@ async function searchingProduct(searchQuery) {
     const data = await res.json();
     console.log(data);
 
-    productsContainer.appendChild(productCard)
+    productsContainer(data)
 
 }
 // Run when page loads
