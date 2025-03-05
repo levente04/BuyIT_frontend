@@ -213,38 +213,41 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         const response = await fetch("/api/getProducts");
         const products = await response.json();
-
-        productsContainer.innerHTML = "";
-
-        products.forEach(products => {
-            const productCard = document.createElement("div");
-            productCard.classList.add("card");
-
-            productCard.innerHTML = `
-                <div class="card-body">
-                    <div class="pic-div">
-                    <img src="/images/${products.image}" alt="${products.itemName}">
-                    </div>
-                </div>
-                <div class="termek-nev">
-                    <span>${products.itemName}</span>
-                </div>
-                <div class="card-footer">
-                    <span>${products.itemPrice} Ft</span>
-                    <div class="kosar">
-                        <button type="button" class="btnKosar" data-id="${products.product_id}">Kosárba</button>
-                    </div>
-                </div>
-            `;
-
-            productsContainer.appendChild(productCard);
-        });
-
-        
+        renderProducts(products, productsContainer);
     } catch (error) {
         console.error("Error fetching products:", error);
     }
 });
+
+// Separate function to render the products
+function renderProducts(products, productsContainer) {
+    productsContainer.innerHTML = ""; // Clear the container
+
+    products.forEach(product => {
+        const productCard = document.createElement("div");
+        productCard.classList.add("card");
+
+        productCard.innerHTML = `
+            <div class="card-body">
+                <div class="pic-div">
+                    <img src="/images/${product.image}" alt="${product.itemName}">
+                </div>
+            </div>
+            <div class="termek-nev">
+                <span>${product.itemName}</span>
+            </div>
+            <div class="card-footer">
+                <span>${product.itemPrice} Ft</span>
+                <div class="kosar">
+                    <button type="button" class="btnKosar" data-id="${product.product_id}">Kosárba</button>
+                </div>
+            </div>
+        `;
+
+        productsContainer.appendChild(productCard);
+    });
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM fully loaded");
@@ -372,7 +375,7 @@ async function searchingProduct(searchQuery) {
     const data = await res.json();
     console.log(data);
 
-    productsContainer(data)
+    renderProducts(data)
 
 }
 // Run when page loads
