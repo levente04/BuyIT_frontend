@@ -208,19 +208,18 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const productsContainer = document.querySelector(".row");
 
     try {
         const response = await fetch("/api/getProducts");
         const products = await response.json();
-        renderProducts(products, productsContainer);
+        renderProducts(products);
     } catch (error) {
         console.error("Error fetching products:", error);
     }
 });
 
 // Separate function to render the products
-function renderProducts(products, productsContainer) {
+function renderProducts(products) {
     productsContainer.innerHTML = ""; // Clear the container
 
     products.forEach(products => {
