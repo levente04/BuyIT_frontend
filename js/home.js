@@ -352,16 +352,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const productsContainer = document.querySelector(".row");
 
     async function searchProducts(event) {
-        event.preventDefault(); // Prevent form submission (page reload)
-        
+        event.preventDefault(); // Stop the page from reloading
+        console.log("Search triggered"); // Debugging log
+
         const query = searchInput.value.trim();
-        if (query.length === 0) return; // Do nothing if the input is empty
+        if (query.length === 0) {
+            console.log("Empty search query");
+            return;
+        }
 
         try {
-            const response = await fetch(`/api/search?q=${query}`);
-            const products = await response.json();
+            console.log("Fetching: /api/search?q=" + query);
+            const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+            
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
 
-            // Clear existing results
+            const products = await response.json();
+            console.log("Search results:", products); // Log results
+
+            // Clear existing products
             productsContainer.innerHTML = "";
 
             if (products.length === 0) {
@@ -392,12 +403,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 productsContainer.appendChild(productCard);
             });
+
         } catch (error) {
             console.error("Error searching products:", error);
         }
     }
 
-    // Trigger search when submitting the form
     searchForm.addEventListener("submit", searchProducts);
 });
 
