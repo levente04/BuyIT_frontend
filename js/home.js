@@ -349,20 +349,22 @@ async function updateCartIndicator() {
 document.addEventListener("DOMContentLoaded", function () {
     const searchForm = document.querySelector(".search-container form");
     const searchInput = document.querySelector(".search-container input");
-    const productsContainer = document.querySelector(".row");
 
-    // Function to handle product search
     async function searchProducts(event) {
-        event.preventDefault();
+        event.preventDefault();  // Prevent form submission to stop page reload
         const query = searchInput.value.trim(); // Get the search input value
-        
+    
         if (!query) {
             return; // Don't search if input is empty
         }
-
+    
         try {
+            // Perform search using the query
             const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-            
+
+            // Log status for debugging
+            console.log('Response Status:', response.status);
+
             if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.statusText}`);
             }
@@ -373,6 +375,11 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error searching products:", error);
         }
     }
+
+    // Attach only one event listener to the search form
+    searchForm.addEventListener("submit", searchProducts);
+});
+
 
     // Function to display search results
     function displaySearchResults(products) {
@@ -408,7 +415,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Attach the search function to the form submission event
     searchForm.addEventListener("submit", searchProducts);
-});
 
 // Run when page loads
 document.addEventListener("DOMContentLoaded", updateCartIndicator);
