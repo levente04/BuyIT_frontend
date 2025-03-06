@@ -29,3 +29,29 @@ proceedToOrder.addEventListener('click', () => {
 backToPayment.addEventListener('click', () => {
     window.location.href = './addPayment.html'
 })
+
+fetch("/api/cart/getItems")
+.then(response => response.json())
+.then(cartItems => {
+    const cartTable = document.getElementById("cartTable").getElementsByTagName("tbody")[0];
+
+    cartItems.forEach(item => {
+        let row = cartTable.insertRow();
+        
+        // Image column
+        let imgCell = row.insertCell(0);
+        let img = document.createElement("img");
+        img.src = item.image; // Make sure this is a valid image URL from DB
+        img.alt = item.product_name;
+        imgCell.appendChild(img);
+
+        // Product name column
+        let nameCell = row.insertCell(1);
+        nameCell.innerHTML = `<h1 class="productName">${item.itemName}</h1>`;
+
+        // Price column
+        let priceCell = row.insertCell(2);
+        priceCell.innerHTML = `<p class="price">${item.itemPrice} Ft</p>`;
+    });
+})
+.catch(error => console.error("Error fetching cart items:", error));
