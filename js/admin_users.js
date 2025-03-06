@@ -116,9 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                                     icon: "success",
                                     timer: 1500,
                                     showConfirmButton: false
-                                }).then(() => {
-                                    window.location.href = 'login.html'; // Redirect after SweetAlert closes
-                                });
+                                })
                             } else {
                                 Swal.fire({
                                     title: "Error!",
