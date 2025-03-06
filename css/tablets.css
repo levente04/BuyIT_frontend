@@ -6,10 +6,17 @@
 }
 
 body {
+    font-family: "Jersey 25", serif;
     background-color: #2c232f;
-    color: white;
 }
 
+.page-title {
+    font-size: 3rem;
+    color: white;
+    text-align: center;
+    margin: 20px;
+    text-shadow: 15px 10px black;
+}
 header {
     background-color: white;
     display: flex;
@@ -22,6 +29,24 @@ header {
     position: relative;
     gap: 10px;
 }
+
+.cart-alert {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: purple;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+}
+
 
 .menu-logo {
     color: black;
@@ -123,63 +148,269 @@ nav a {
     padding-left: 10px;
 }
 
+#cartCount {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    background-color: purple;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+}
+
+
 .container {
-    margin: 40px;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 10px;
 }
 
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 50px;
     gap: 10px;
-    justify-content: space-evenly;
+    justify-content: flex-start;
 }
 
-.product {
-    max-width: 300px;
-    margin: auto;
-    text-align: center;
+.card {
+    flex: 0 1 calc((100% - 40px) / 5);
+    background-color: hsl(285, 15%, 16%);
+    border: solid 3px;
     border-radius: 20px;
-    background-color: white;
-    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgb(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: ease 500ms;
 }
 
-img {
-    width: 100%;
-    padding: 20px;
-    border-radius: 10%;
-}
-
-.productName {
-    color: black;
-}
-
-.price {
-    font-size: 22px;
-    color: rgb(115, 113, 113);
-
-}
-  
-.product button {
-    border: none;
-    outline: 0;
-    padding: 12px;
-    margin-bottom: 10px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 80%;
-    font-size: 18px;
-    border-radius: 10px;
-}
-
-.product:hover{
+.card:hover {
     transform: scale(1.01);
 }
 
-.product button:hover {
+.card-body {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-radius: inherit;
+    overflow: hidden;
+}
+
+.pic-div {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    overflow: hidden;
+    border-radius: inherit;
+}
+
+.pic-div img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: inherit;
+    object-fit: contain;
+}
+
+.termek-nev {
+    font-size: 1.5rem;
+    color: white;
+    padding-left: 13px;
+}
+
+.card-footer {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-evenly;
+    color: white;
+}
+
+.card-footer span {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-footer i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+    background-color: silver;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: ease 500ms;
+}
+
+.card-footer i:hover {
+    transform: scale(1.01);
+}
+
+.kosar {
     background-color: purple;
+    border-radius: 20px;
+    padding: 10px;
+    width: 100px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btnKosar {
+    font-size: 1.2rem;
+    color:white;
+    background-color: inherit;
+    border: none;
+    cursor: inherit;
+}
+
+.fixed {
+    position: fixed;
+    right: 1%;
+    top: 75%;
+    z-index: 1000;
+    background-color: purple;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: ease 500ms;
+}
+
+.fixed:hover {
+    transform: scale(1.1);
+}
+
+.fixed i {
+    font-size: 2rem;
+    color: white;
+}
+
+@media screen and (max-width: 1200px) {
+    .card {
+        flex: 0 1 calc((100% - 30px) / 4);
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .card {
+        flex: 0 1 calc((100% - 20px) / 3);
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .card {
+        flex: 0 1 calc((100% - 10px) / 2);
+    }
+
+    .termek-nev {
+        font-size: 1.2rem;
+    }
+
+    .card-footer span {
+        font-size: 1.2rem;
+    }
+
+    .card-footer i {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+
+    #btnKosar {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .card {
+        flex: 0 1 100%;
+    }
+
+    .termek-nev {
+        font-size: 1rem;
+    }
+
+    .card-footer span {
+        font-size: 1rem;
+    }
+
+    .card-footer i {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+
+    #btnKosar {
+        font-size: 0.9rem;
+    }
+}
+
+/* Make sure the modal is centered and fully visible */
+#logoutModal {
+    display: none;  /* Initially hidden */
+    position: fixed;
+    z-index: 1;  /* Sit on top of other content */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);  /* Background overlay */
+    overflow: auto;
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 4px solid purple;
+    width: 30%; /* Adjust width as needed */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Buttons */
+button {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 @media screen  and (max-width: 1210px) {
