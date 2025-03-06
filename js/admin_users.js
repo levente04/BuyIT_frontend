@@ -7,7 +7,7 @@ logo.addEventListener('click', () => {
 
 async function fetchUsers() {
     try {
-        let response = await fetch("/api/users"); // Adjust URL if needed
+        let response = await fetch("/api/getUsers"); // Adjust URL if needed
         let users = await response.json();
 
         let tableBody = document.getElementById("userTableBody");
@@ -41,7 +41,7 @@ async function deleteUser(userId) {
     if (!confirm("Biztosan törölni szeretnéd ezt a felhasználót?")) return;
 
     try {
-        let response = await fetch(`/users/${userId}`, {
+        let response = await fetch(`/api/getUsers/${userId}`, {
             method: "DELETE",
         });
 
