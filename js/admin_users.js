@@ -1,12 +1,13 @@
-const logo = document.getElementsByClassName('menu-logo')[0]
-
+const logo = document.getElementsByClassName('menu-logo')[0];
+const usersContainer = document.getElementById('users-container'); // The container where users will be displayed
 
 logo.addEventListener('click', () => {
-    window.location.href = ('./home.html')
-})
+    window.location.href = './home.html';
+});
 
 document.addEventListener("DOMContentLoaded", async () => {
     try {
+        // Fetch users from the backend
         const response = await fetch('/api/admin/users', {
             credentials: 'include',
         });
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const users = await response.json();
+
         if (users.length === 0) {
             usersContainer.innerHTML = "<p>No users found.</p>";
             return;
@@ -23,16 +25,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         usersContainer.innerHTML = ""; // Clear previous content
 
-        users.forEach(users => {
+        // Display each user with their name and email
+        users.forEach(user => {
             const userElement = document.createElement('div');
             userElement.classList.add('user-item');
-            userElement.setAttribute('data-user-id', users.user_id);
+            userElement.setAttribute('data-user-id', user.user_id);
 
             userElement.innerHTML = `
                 <div class="user-details">
-                    <p><strong>Name:</strong> ${users.name}</p>
-                    <p><strong>Email:</strong> ${users.email}</p>
-                    <button class="btn-delete" onclick="removeUser(${users.user_id})">Remove</button>
+                    <p><strong>Name:</strong> ${user.name}</p>
+                    <p><strong>Email:</strong> ${user.email}</p>
+                    <button class="btn-delete" onclick="removeUser(${user.user_id})">Remove</button>
                 </div>
             `;
 
@@ -75,72 +78,3 @@ function removeUser(user_id) {
         console.error("Error removing user:", error);
     });
 }
-
-// Fetch current admin details and manage logout
-document.addEventListener("DOMContentLoaded", async () => {
-    const adminName = document.getElementById('admin-name');
-
-    try {
-        const response = await fetch('/api/admin/getDetails', {
-            method: 'GET',
-            credentials: 'include'
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            // Admin is logged in
-            adminName.textContent = `Welcome, ${data.name}`; // Set the admin's name
-
-            // Logout logic
-            logoutButton.addEventListener('click', async (e) => {
-                e.preventDefault();
-
-                Swal.fire({
-                    title: "Are you sure you want to log out?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Log Out",
-                    cancelButtonText: "Cancel"
-                }).then(async (result) => {
-                    if (result.isConfirmed) {
-                        try {
-                            const logoutResponse = await fetch('/api/admin/logout', {
-                                method: 'POST',
-                                credentials: 'include',
-                            });
-
-                            if (logoutResponse.ok) {
-                                Swal.fire({
-                                    title: "Logged out successfully!",
-                                    icon: "success",
-                                    timer: 1500,
-                                    showConfirmButton: false
-                                })
-                            } else {
-                                Swal.fire({
-                                    title: "Error!",
-                                    text: "Logout failed.",
-                                    icon: "error",
-                                    confirmButtonText: "OK"
-                                });
-                            }
-                        } catch (error) {
-                            Swal.fire({
-                                title: "Error!",
-                                text: "There was an error logging out.",
-                                icon: "error",
-                                confirmButtonText: "OK"
-                            });
-                            console.error('Error logging out:', error);
-                        }
-                    }
-                });
-            });
-        }
-    } catch (error) {
-        console.error('Error fetching admin details:', error);
-    }
-});
-
-
