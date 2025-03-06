@@ -127,11 +127,12 @@ fetch("/api/cart/getItems")
     cartItems.forEach(item => {
         let row = cartTable.insertRow();
         
-        // Image column
+        // Create image column
         let imgCell = row.insertCell(0);
         let img = document.createElement("img");
-        img.src = "/" + item.image;
-        img.alt = item.product_name;
+        // Assuming your image path in the database is correct (like 'images/iPhone16Pro.jpg')
+        img.src = item.image; // Directly using the image path from the database
+        img.alt = item.itemName;
         imgCell.appendChild(img);
 
         // Product name column
