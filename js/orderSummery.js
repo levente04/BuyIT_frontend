@@ -48,14 +48,14 @@ fetch("/api/cart/items")
 
         // Product name column
         let nameCell = row.insertCell(1);
-        nameCell.innerHTML = `<h1 class="productName">${item.product_name}</h1>`;
+        nameCell.innerHTML = `<h1 class="productName">${item.itemName}</h1>`;
 
         // Price column
         let priceCell = row.insertCell(2);
-        priceCell.innerHTML = `<p class="price">${parseFloat(item.price).toLocaleString()} Ft</p>`;
+        priceCell.innerHTML = `<p class="price">${parseFloat(item.itemPrice).toLocaleString()} Ft</p>`;
 
         // Add item price to subtotal (ensure it's a number)
-        subtotal += parseFloat(item.price) || 0;
+        subtotal += parseFloat(item.itemPrice) || 0;
     });
 
     const deliveryFee = 1490;
