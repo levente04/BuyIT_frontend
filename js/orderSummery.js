@@ -130,7 +130,7 @@ fetch("/api/cart/getItems")
         // Image column
         let imgCell = row.insertCell(0);
         let img = document.createElement("img");
-        img.src = item.image.startsWith("http") ? item.image : "/" + item.image;
+        img.src = "/" + item.image;
         img.alt = item.product_name;
         imgCell.appendChild(img);
 
