@@ -30,7 +30,7 @@ backToPayment.addEventListener('click', () => {
     window.location.href = './addPayment.html'
 })
 
-fetch("/api/cart/getItems")
+fetch("/api/cart/items")
 .then(response => response.json())
 .then(cartItems => {
     const cartTable = document.getElementById("cartTable").getElementsByTagName("tbody")[0];
@@ -42,21 +42,22 @@ fetch("/api/cart/getItems")
         // Image column
         let imgCell = row.insertCell(0);
         let img = document.createElement("img");
-        img.src = item.image; // Make sure this is a valid image URL from DB
+        img.src = item.image.startsWith("http") ? item.image : "/" + item.image;
         img.alt = item.product_name;
         imgCell.appendChild(img);
 
         // Product name column
         let nameCell = row.insertCell(1);
-        nameCell.innerHTML = `<h1 class="productName">${item.itemName}</h1>`;
+        nameCell.innerHTML = `<h1 class="productName">${item.product_name}</h1>`;
 
         // Price column
         let priceCell = row.insertCell(2);
-        priceCell.innerHTML = `<p class="price">${item.itemPrice} Ft</p>`;
+        priceCell.innerHTML = `<p class="price">${parseFloat(item.price).toLocaleString()} Ft</p>`;
 
-        // Add item price to subtotal
+        // Add item price to subtotal (ensure it's a number)
         subtotal += parseFloat(item.price) || 0;
     });
+
     const deliveryFee = 1490;
     const totalPrice = subtotal + deliveryFee;
 
