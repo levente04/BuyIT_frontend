@@ -37,26 +37,6 @@ async function fetchUsers() {
     }
 }
 
-async function deleteUser(userId) {
-    if (!confirm("Biztosan törölni szeretnéd ezt a felhasználót?")) return;
-
-    try {
-        let response = await fetch(`/api/getUsers/${userId}`, {
-            method: "DELETE",
-        });
-
-        if (response.ok) {
-            alert("Felhasználó törölve!");
-            fetchUsers(); // Refresh the user list
-        } else {
-            alert("Hiba történt a törlés során.");
-        }
-    } catch (error) {
-        console.error("Error deleting user:", error);
-    }
-}
-
-// Load users when the page loads
 fetchUsers();
 
 
