@@ -55,7 +55,7 @@ fetch("/api/cart/getItems")
         priceCell.innerHTML = `<p class="price">${item.itemPrice} Ft</p>`;
 
         // Add item price to subtotal
-        subtotal += parseFloat(item.price);
+        subtotal += parseFloat(item.price) || 0;
     });
     const deliveryFee = 1490;
     const totalPrice = subtotal + deliveryFee;
