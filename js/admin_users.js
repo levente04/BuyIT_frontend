@@ -137,14 +137,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                     }
                 });
             });
-
-        } else {
-            // Admin not logged in
-            window.location.href = "login.html";
         }
     } catch (error) {
         console.error('Error fetching admin details:', error);
-        window.location.href = "login.html";
     }
 });
 
