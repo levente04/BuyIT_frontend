@@ -129,11 +129,7 @@ fetch("/api/cart/getItems")
         
         // Create image column
         let imgCell = row.insertCell(0);
-        let img = document.createElement("img");
-        // Assuming your image path in the database is correct (like 'images/iPhone16Pro.jpg')
-        img.src = item.image; // Directly using the image path from the database
-        img.alt = item.itemName;
-        imgCell.appendChild(img);
+        imgCell.innerHTML = `<img src="images/${item.image}" alt= ${item.itemName}>`;
 
         // Product name column
         let nameCell = row.insertCell(1);
