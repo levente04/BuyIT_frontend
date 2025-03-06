@@ -34,6 +34,7 @@ fetch("/api/cart/getItems")
 .then(response => response.json())
 .then(cartItems => {
     const cartTable = document.getElementById("cartTable").getElementsByTagName("tbody")[0];
+    let subtotal = 0; // Initialize subtotal
 
     cartItems.forEach(item => {
         let row = cartTable.insertRow();
