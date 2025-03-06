@@ -52,6 +52,15 @@ fetch("/api/cart/getItems")
         // Price column
         let priceCell = row.insertCell(2);
         priceCell.innerHTML = `<p class="price">${item.itemPrice} Ft</p>`;
+
+        // Add item price to subtotal
+        subtotal += parseFloat(item.price);
     });
+    const deliveryFee = 1490;
+    const totalPrice = subtotal + deliveryFee;
+
+    // Update price display
+    document.getElementById("subtotal").textContent = subtotal.toLocaleString();
+    document.getElementById("total").textContent = `Végösszeg: ${totalPrice.toLocaleString()} Ft`;
 })
 .catch(error => console.error("Error fetching cart items:", error));
