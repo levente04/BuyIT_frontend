@@ -1,10 +1,15 @@
 const belepesText=document.getElementsByClassName('belepes-text')[0]
+const logo = document.getElementsByClassName('menu-logo')[0]
 const phones = document.getElementsByClassName('phones')[0]
 const tablets = document.getElementsByClassName('tablets')[0]
 const laptops = document.getElementsByClassName('laptops')[0]
 
 const iconAdmin = document.getElementsByClassName('icon-admin')[0]
 const iconBasket = document.getElementsByClassName('icon-basket')[0]
+
+logo.addEventListener('click', () => {
+    window.location.href = './home.html'
+})
 
 phones.addEventListener('click', () => {
     window.location.href = './phones.html'
