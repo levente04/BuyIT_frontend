@@ -5,7 +5,7 @@ const laptops = document.getElementsByClassName('laptops')[0]
 
 const iconAdmin = document.getElementsByClassName('icon-admin')[0]
 const iconBasket = document.getElementsByClassName('icon-basket')[0]
-const iconProfile = document.getElementsByClassName('icon-profile')[0]
+const iconProfile = document.getElementsByClassName('fa-solid fa-user')[0]
 
 iconProfile.addEventListener('click', () => {
     window.location.href = './profile.html'
