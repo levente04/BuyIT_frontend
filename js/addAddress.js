@@ -123,3 +123,42 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
     }
 });
+
+const btnProceedToPay = document.getElementById('btnProceedToPay');
+
+btnProceedToPay.addEventListener('click', addAddress);
+
+async function addAddress() {
+    const note = document.getElementById('note').value;
+    const postcode = document.getElementById('postCode').value;
+    const city = document.getElementById('city').value;
+    const address = document.getElementById('address').value;
+
+    console.log(note, postcode, city, address);
+
+    const res = await fetch('/api/addAddress', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({ note, postcode, city, address })
+    });
+
+    const data = await res.json();
+    console.log(data);
+    
+    if (res.ok) {
+        alert(data.message);
+        window.location.href = '../addPayment.html';
+    } else if (data.errors) {
+        let errorMessage = '';
+        for (let i = 0; i < data.errors.length; i++) {
+            errorMessage += `${data.errors[i].error}\n`;
+        }
+        alert(errorMessage);
+    } else if (data.error) {
+        alert(data.error);
+    } else {
+        alert('Ismeretlen hiba');
+    }
+}
