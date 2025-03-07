@@ -135,10 +135,11 @@ async function addAddress() {
     const address = document.getElementById('address').value;
 
     // You need to fetch user_id and order_id dynamically
-    const user_id = 1;  // Replace with actual user ID
-    const order_id = 123; // Replace with actual order ID
+    const user_id = getUserId();  // Replace this with actual logic to get user_id
+    const order_id = getOrderId(); // Replace this with actual logic to get order_id
 
-    if (!note || !postcode || !city || !address) {
+    // Check if all required fields are filled
+    if (!note || !postcode || !city || !address || !user_id || !order_id) {
         alert("Tölts ki minden mezőt!");
         return;
     }
@@ -159,7 +160,7 @@ async function addAddress() {
 
         if (res.ok) {
             alert(data.message);
-            window.location.href = '../addPayment.html';
+            window.location.href = '../addPayment.html'; // Redirect to next page
         } else {
             alert(data.error || 'Hiba történt');
         }
@@ -167,4 +168,16 @@ async function addAddress() {
         console.error("Fetch error:", error);
         alert("Hálózati hiba. Próbáld újra!");
     }
+}
+
+// Simulating getting user_id dynamically (you can replace it with actual logic)
+function getUserId() {
+    // Example: Get user_id from sessionStorage, localStorage, or from an authenticated session
+    return localStorage.getItem('user_id') || 1;  // Replace with actual logic
+}
+
+// Simulating getting order_id dynamically (you can replace it with actual logic)
+function getOrderId() {
+    // Example: Get order_id from session, URL params, or a global variable
+    return localStorage.getItem('order_id') || 123;  // Replace with actual logic
 }
