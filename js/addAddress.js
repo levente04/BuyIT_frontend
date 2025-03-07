@@ -134,31 +134,37 @@ async function addAddress() {
     const city = document.getElementById('city').value;
     const address = document.getElementById('address').value;
 
-    console.log(note, postcode, city, address);
+    // You need to fetch user_id and order_id dynamically
+    const user_id = 1;  // Replace with actual user ID
+    const order_id = 123; // Replace with actual order ID
 
-    const res = await fetch('/api/addAddress', {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify({ note, postcode, city, address })
-    });
+    if (!note || !postcode || !city || !address) {
+        alert("Tölts ki minden mezőt!");
+        return;
+    }
 
-    const data = await res.json();
-    console.log(data);
-    
-    if (res.ok) {
-        alert(data.message);
-        window.location.href = '../addPayment.html';
-    } else if (data.errors) {
-        let errorMessage = '';
-        for (let i = 0; i < data.errors.length; i++) {
-            errorMessage += `${data.errors[i].error}\n`;
+    console.log("Sending data:", { order_id, user_id, note, postcode, city, address });
+
+    try {
+        const res = await fetch('/api/addAddress', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ order_id, user_id, note, postcode, city, address })
+        });
+
+        const data = await res.json();
+        console.log("Response data:", data);
+
+        if (res.ok) {
+            alert(data.message);
+            window.location.href = '../addPayment.html';
+        } else {
+            alert(data.error || 'Hiba történt');
         }
-        alert(errorMessage);
-    } else if (data.error) {
-        alert(data.error);
-    } else {
-        alert('Ismeretlen hiba');
+    } catch (error) {
+        console.error("Fetch error:", error);
+        alert("Hálózati hiba. Próbáld újra!");
     }
 }
