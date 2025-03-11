@@ -128,7 +128,25 @@ nav a {
 }
 
 p {
+    display: inline-block;
     font-size: 2rem;
+}
+
+.btn-delete {
+    display: inline-block;
+    background-color: #e74c3c;  /* Red for remove button */
+    color: white;
+    font-size: 1.4rem;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-left: 20px;  /* Ensure the remove button is separated from the content */
+}
+
+.btn-delete:hover {
+    background-color: #c0392b;  /* Darker red on hover */
 }
 
 
