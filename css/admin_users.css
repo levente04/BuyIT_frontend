@@ -130,6 +130,7 @@ nav a {
 p {
     display: inline-block;
     font-size: 2rem;
+    color: purple;
 }
 
 .btn-delete {

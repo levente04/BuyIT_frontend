@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div class="user-details">
                     <p><strong>Név:</strong> ${user.name}</p>
                     <p><strong>Email:</strong> ${user.email}</p>
-                    <button class="btn-delete" onclick="removeUser(${user.user_id})">Remove</button>
+                    <button class="btn-delete" onclick="removeUser(${user.user_id})">Törlés</button>
                 </div>
             `;
 
