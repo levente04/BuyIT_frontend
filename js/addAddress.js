@@ -124,32 +124,53 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
     const proceedToPayButton = document.getElementById("btnProceedToPay");
     const messageBox = document.createElement("p");
     messageBox.id = "messageBox";
     document.querySelector(".container").appendChild(messageBox);
 
+    async function getOrCreateCartId() {
+        let cartId = localStorage.getItem("cartId");
+
+        if (!cartId) {
+            try {
+                const response = await fetch("/api/createCart", { method: "POST" });
+                const data = await response.json();
+
+                if (response.ok && data.cartId) {
+                    cartId = data.cartId;
+                    localStorage.setItem("cartId", cartId);
+                } else {
+                    console.error("Failed to create cart");
+                    return null;
+                }
+            } catch (error) {
+                console.error("Error creating cart:", error);
+                return null;
+            }
+        }
+        return cartId;
+    }
+
     proceedToPayButton.addEventListener("click", async function () {
         messageBox.innerText = "";
-        
+
         const formData = {
             city: document.getElementById("city").value,
             address: document.getElementById("address").value,
             postcode: document.getElementById("postCode").value,
             tel: document.getElementById("tel").value
         };
-        
-        let cartId = localStorage.getItem("cartId");
+
+        let cartId = await getOrCreateCartId();
         let token = localStorage.getItem("token");
-        
-        // If cartId is missing, set a default or notify the user
+
         if (!cartId) {
             messageBox.innerText = "Hiba: Nincsenek termékek a kosárban!";
             return;
         }
-        
-        // If token is missing, redirect to login
+
         if (!token) {
             messageBox.innerText = "Hiba: Be kell jelentkeznie a rendeléshez!";
             setTimeout(() => {
@@ -159,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            const response = await fetch(`/api/createOrder?cart_id=${cartId}`, {
+            const response = await fetch(`/api/createOrder/${cartId}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -167,11 +188,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 body: JSON.stringify(formData)
             });
-            
+
             const data = await response.json();
             if (response.ok) {
                 messageBox.innerText = "Rendelés sikeres!";
-                localStorage.removeItem("cartId"); // Clear cart after order
+                localStorage.removeItem("cartId");
                 setTimeout(() => {
                     window.location.href = "orderConfirmation.html";
                 }, 2000);
@@ -183,3 +204,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
