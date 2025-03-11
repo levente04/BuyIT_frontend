@@ -130,11 +130,11 @@ nav a {
 p {
     display: inline-block;
     font-size: 2rem;
-    color: purple;
+    font-style: italic;
 }
 
 strong {
-    color: white;
+    font-style: normal;
 }
 
 .btn-delete {
