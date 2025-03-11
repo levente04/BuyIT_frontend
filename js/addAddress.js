@@ -147,12 +147,12 @@ async function addAddress() {
     console.log("Sending data:", { order_id, user_id, note, postcode, city, address });
 
     try {
-        const res = await fetch('/api/addAddress', {
+        const res = await fetch('/api/createOrder', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ order_id, user_id, note, postcode, city, address })
+            body: JSON.stringify({ user_id, city, address, postcode, tel })
         });
 
         const data = await res.json();
@@ -168,16 +168,4 @@ async function addAddress() {
         console.error("Fetch error:", error);
         alert("Hálózati hiba. Próbáld újra!");
     }
-}
-
-// Simulating getting user_id dynamically (you can replace it with actual logic)
-function getUserId() {
-    // Example: Get user_id from sessionStorage, localStorage, or from an authenticated session
-    return localStorage.getItem('user_id') || 1;  // Replace with actual logic
-}
-
-// Simulating getting order_id dynamically (you can replace it with actual logic)
-function getOrderId() {
-    // Example: Get order_id from session, URL params, or a global variable
-    return localStorage.getItem('order_id') || 123;  // Replace with actual logic
 }
