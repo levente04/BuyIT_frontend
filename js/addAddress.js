@@ -140,16 +140,26 @@ document.addEventListener("DOMContentLoaded", function () {
             tel: document.getElementById("tel").value
         };
         
-        const cartId = localStorage.getItem("cartId"); // Assumes cartId is stored in localStorage
-        const token = localStorage.getItem("token"); // Assumes token is stored in localStorage
+        let cartId = localStorage.getItem("cartId");
+        let token = localStorage.getItem("token");
         
-        if (!cartId || !token) {
-            messageBox.innerText = "Hiba: Hiányzó kosár azonosító vagy bejelentkezési token.";
+        // If cartId is missing, set a default or notify the user
+        if (!cartId) {
+            messageBox.innerText = "Hiba: Nincsenek termékek a kosárban!";
             return;
         }
         
+        // If token is missing, redirect to login
+        if (!token) {
+            messageBox.innerText = "Hiba: Be kell jelentkeznie a rendeléshez!";
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 2000);
+            return;
+        }
+
         try {
-            const response = await fetch(`/api/createOrder?cart_id=${cart_id}`, {
+            const response = await fetch(`/api/createOrder?cart_id=${cartId}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -162,6 +172,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (response.ok) {
                 messageBox.innerText = "Rendelés sikeres!";
                 localStorage.removeItem("cartId"); // Clear cart after order
+                setTimeout(() => {
+                    window.location.href = "orderConfirmation.html";
+                }, 2000);
             } else {
                 messageBox.innerText = data.error || "Hiba történt a rendelés során.";
             }
