@@ -127,6 +127,10 @@ nav a {
     margin: 40px;
 }
 
+p {
+    font-size: 2rem;
+}
+
 
 @media screen  and (max-width: 1210px) {
     .search-container input[type=text] {
