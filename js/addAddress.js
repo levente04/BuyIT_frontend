@@ -124,3 +124,49 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const proceedToPayButton = document.getElementById("btnProceedToPay");
+    const messageBox = document.createElement("p");
+    messageBox.id = "messageBox";
+    document.querySelector(".container").appendChild(messageBox);
+
+    proceedToPayButton.addEventListener("click", async function () {
+        messageBox.innerText = "";
+        
+        const formData = {
+            city: document.getElementById("city").value,
+            address: document.getElementById("address").value,
+            postcode: document.getElementById("postCode").value,
+            tel: document.getElementById("tel").value
+        };
+        
+        const cartId = localStorage.getItem("cartId"); // Assumes cartId is stored in localStorage
+        const token = localStorage.getItem("token"); // Assumes token is stored in localStorage
+        
+        if (!cartId || !token) {
+            messageBox.innerText = "Hiba: Hiányzó kosár azonosító vagy bejelentkezési token.";
+            return;
+        }
+        
+        try {
+            const response = await fetch(`/api/createOrder?cart_id=${cartId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            const data = await response.json();
+            if (response.ok) {
+                messageBox.innerText = "Rendelés sikeres!";
+                localStorage.removeItem("cartId"); // Clear cart after order
+            } else {
+                messageBox.innerText = data.error || "Hiba történt a rendelés során.";
+            }
+        } catch (error) {
+            messageBox.innerText = "Hálózati hiba történt.";
+        }
+    });
+});
