@@ -130,6 +130,9 @@ nav a {
 p {
     display: inline-block;
     font-size: 2rem;
+}
+
+strong {
     color: purple;
 }
 
