@@ -127,74 +127,33 @@ nav a {
     margin: 40px;
 }
 
-h1 {
-    margin-bottom: 35px;
-    font-size: 3rem;
+p {
+    display: inline-block;
+    font-size: 2rem;
+    font-style: italic;
 }
 
-table {
-    border-style: solid;
-    border-color: black;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+strong {
+    font-style: normal;
 }
 
-td {
-    padding: 20px;
-}
-
-.name {
-    width: 20%;
-    font-size: 1.7rem;
-}
-
-.email {
-    width: 20%;
-    font-size: 1.7rem;
-}
-
-.orders {
-    width: 25%;
-    font-size: 1.7rem;
-}
-
-.details {
-    width: 25%;
-}
-
-button {
-    border-style: none;
-}
-
-#btnmanage {
-    background-color: black;
+.btn-delete {
+    display: inline-block;
+    background-color: #e74c3c;  /* Red for remove button */
     color: white;
-    font-size: 1.7rem;
-    width: 150px;
-    height: 40px;
+    font-size: 1.4rem;
+    border: none;
+    padding: 8px 12px;
     border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-left: 20px;  /* Ensure the remove button is separated from the content */
 }
 
-#btndetails {
-    background-color: black;
-    color: white;
-    font-size: 1.7rem;
-    width: 150px;
-    height: 40px;
-    border-radius: 10px;
+.btn-delete:hover {
+    background-color: #c0392b;  /* Darker red on hover */
 }
 
-#btndeluser {
-    background-color: red;
-    color: white;
-    font-size: 1.7rem;
-    width: 250px;
-    height: 40px;
-    border-radius: 10px;
-}
 
 @media screen  and (max-width: 1210px) {
     .search-container input[type=text] {
