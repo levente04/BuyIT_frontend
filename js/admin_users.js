@@ -1,5 +1,5 @@
 const logo = document.getElementsByClassName('menu-logo')[0];
-const usersContainer = document.getElementById('users-container'); // The container where users will be displayed
+const usersContainer = document.getElementById("usersContainer");
 
 logo.addEventListener('click', () => {
     window.location.href = './home.html';
