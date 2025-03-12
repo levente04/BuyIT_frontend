@@ -6,11 +6,10 @@ logo.addEventListener('click', () => {
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
+    const usersContainer = document.getElementById("usersContainer"); // Ensure it's defined
+
     try {
-        // Fetch users from the backend
-        const response = await fetch('/api/admin/users', {
-            credentials: 'include',
-        });
+        const response = await fetch('/api/admin/users', { credentials: 'include' });
 
         if (!response.ok) {
             throw new Error('Failed to fetch users');
@@ -25,7 +24,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         usersContainer.innerHTML = ""; // Clear previous content
 
-        // Display each user with their name and email
         users.forEach(user => {
             const userElement = document.createElement('div');
             userElement.classList.add('user-item');
@@ -35,10 +33,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div class="user-details">
                     <p><strong>Név:</strong> ${user.name}</p>
                     <p><strong>Email:</strong> ${user.email}</p>
-                    <button class="btn-delete" onclick="removeUser(${user.user_id})">Törlés</button>
                 </div>
             `;
 
+            // Create delete button dynamically
+            const deleteButton = document.createElement("button");
+            deleteButton.classList.add("btn-delete");
+            deleteButton.textContent = "Törlés";
+            deleteButton.addEventListener("click", () => removeUser(user.user_id));
+
+            userElement.appendChild(deleteButton);
             usersContainer.appendChild(userElement);
         });
 
@@ -51,11 +55,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 function removeUser(user_id) {
     fetch("/api/admin/removeUser", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
         credentials: "include",
         body: JSON.stringify({ user_id }),
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to delete user");
+        }
+        return response.json();
+    })
     .then(data => {
         Swal.fire({
             title: "User Removed!",
@@ -64,8 +76,8 @@ function removeUser(user_id) {
             timer: 1500,
             showConfirmButton: false
         }).then(() => {
-            // Refresh users list after SweetAlert closes
-            location.reload();
+            // Remove user from the DOM instead of reloading
+            document.querySelector(`[data-user-id="${user_id}"]`).remove();
         });
     })
     .catch(error => {
