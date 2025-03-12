@@ -124,38 +124,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 });
 
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", function () {
     const proceedToPayButton = document.getElementById("btnProceedToPay");
     const messageBox = document.createElement("p");
     messageBox.id = "messageBox";
     document.querySelector(".container").appendChild(messageBox);
 
-    async function getOrCreateCartId() {
-        let cartId = localStorage.getItem("cartId");
-
-        if (!cartId) {
-            try {
-                const response = await fetch("/api/createCart", { method: "POST" });
-                const data = await response.json();
-
-                if (response.ok && data.cartId) {
-                    cartId = data.cartId;
-                    localStorage.setItem("cartId", cartId);
-                } else {
-                    console.error("Failed to create cart");
-                    return null;
-                }
-            } catch (error) {
-                console.error("Error creating cart:", error);
-                return null;
-            }
-        }
-        return cartId;
-    }
-
     proceedToPayButton.addEventListener("click", async function () {
-        messageBox.innerText = "";
+        messageBox.innerText = ""; // Clear any previous messages
 
+        // Collect form data
         const formData = {
             city: document.getElementById("city").value,
             address: document.getElementById("address").value,
@@ -163,45 +141,35 @@ document.addEventListener("DOMContentLoaded", async function () {
             tel: document.getElementById("tel").value
         };
 
-        let cartId = await getOrCreateCartId();
-        let token = localStorage.getItem("token");
-
-        if (!cartId) {
-            messageBox.innerText = "Hiba: Nincsenek termékek a kosárban!";
-            return;
-        }
-
-        if (!token) {
-            messageBox.innerText = "Hiba: Be kell jelentkeznie a rendeléshez!";
-            setTimeout(() => {
-                window.location.href = "login.html";
-            }, 2000);
+        // Validate form data
+        if (!formData.city || !formData.address || !formData.postcode || !formData.tel) {
+            messageBox.innerText = "Kérjük, töltsd ki az összes mezőt!";
             return;
         }
 
         try {
-            const response = await fetch(`/api/createOrder/${cartId}`, {
-                method: "POST",
+            // Send data to the backend
+            const response = await fetch('/api/createOrder', {
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
+                    'Content-Type': 'application/json',
                 },
+                credentials: 'include', // Include cookies for authentication
                 body: JSON.stringify(formData)
             });
 
             const data = await response.json();
+
             if (response.ok) {
-                messageBox.innerText = "Rendelés sikeres!";
-                localStorage.removeItem("cartId");
-                setTimeout(() => {
-                    window.location.href = "orderConfirmation.html";
-                }, 2000);
+                messageBox.innerText = "Rendelés sikeresen létrehozva!";
+                // Optionally, redirect to a confirmation page
+                window.location.href = './orderConfirmation.html';
             } else {
                 messageBox.innerText = data.error || "Hiba történt a rendelés során.";
             }
         } catch (error) {
             messageBox.innerText = "Hálózati hiba történt.";
+            console.error('Error creating order:', error);
         }
     });
 });
-
