@@ -6,7 +6,12 @@ logo.addEventListener('click', () => {
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const usersContainer = document.getElementById("usersContainer"); // Ensure it's defined
+    const usersContainer = document.getElementById("usersContainer");
+
+    if (!usersContainer) {
+        console.error("Error: Element with ID 'usersContainer' not found.");
+        return;
+    }
 
     try {
         const response = await fetch('/api/admin/users', { credentials: 'include' });
