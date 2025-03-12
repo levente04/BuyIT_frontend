@@ -131,42 +131,45 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".container").appendChild(messageBox);
 
     proceedToPayButton.addEventListener("click", async function () {
-        messageBox.innerText = "";
-        
+        messageBox.innerText = ""; // Clear any previous messages
+
+        // Collect form data
         const formData = {
             city: document.getElementById("city").value,
             address: document.getElementById("address").value,
             postcode: document.getElementById("postCode").value,
             tel: document.getElementById("tel").value
         };
-        
-        const cartId = localStorage.getItem("cartId"); // Assumes cartId is stored in localStorage
-        const token = localStorage.getItem("token"); // Assumes token is stored in localStorage
-        
-        if (!cartId || !token) {
-            messageBox.innerText = "Hiba: Hiányzó kosár azonosító vagy bejelentkezési token.";
+
+        // Validate form data
+        if (!formData.city || !formData.address || !formData.postcode || !formData.tel) {
+            messageBox.innerText = "Kérjük, töltsd ki az összes mezőt!";
             return;
         }
-        
+
         try {
-            const response = await fetch(`/api/createOrder?cart_id=${cartId}`, {
-                method: "POST",
+            // Send data to the backend
+            const response = await fetch('/api/createOrder', {
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
+                    'Content-Type': 'application/json',
                 },
+                credentials: 'include', // Include cookies for authentication
                 body: JSON.stringify(formData)
             });
-            
+
             const data = await response.json();
+
             if (response.ok) {
-                messageBox.innerText = "Rendelés sikeres!";
-                localStorage.removeItem("cartId"); // Clear cart after order
+                messageBox.innerText = "Rendelés sikeresen létrehozva!";
+                // Optionally, redirect to a confirmation page
+                window.location.href = './orderConfirmation.html';
             } else {
                 messageBox.innerText = data.error || "Hiba történt a rendelés során.";
             }
         } catch (error) {
             messageBox.innerText = "Hálózati hiba történt.";
+            console.error('Error creating order:', error);
         }
     });
 });
