@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 messageBox.style.color = "#2ecc71";
 
                 setTimeout(() => {
-                    window.location.href = './orderConfirmation.html';
+                    window.location.href = './addPayment.html';
                 }, 1000);
             } else {
                 messageBox.innerText = data.error || "Hiba történt a rendelés során.";
