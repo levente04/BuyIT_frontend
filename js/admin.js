@@ -3,6 +3,7 @@ const phones = document.getElementsByClassName('phones')[0]
 const tablets = document.getElementsByClassName('tablets')[0]
 const laptops = document.getElementsByClassName('laptops')[0]
 const btnusers = document.getElementsByClassName('users')[0]
+const btnorders = document.getElementsByClassName('orders')[0]
 const btnaddproduct = document.getElementsByClassName('addproduct')[0]
 
 logo.addEventListener('click', () => {
