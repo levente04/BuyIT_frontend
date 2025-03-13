@@ -133,6 +133,10 @@ table {
     font-size: 2rem;
 }
 
+#cimsor {
+    color: purple;
+}
+
 
 @media screen  and (max-width: 1210px) {
     .search-container input[type=text] {
