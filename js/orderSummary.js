@@ -115,39 +115,86 @@ document.addEventListener("DOMContentLoaded", async function () {
             window.location.href = "login.html";
         });
     }
-});
-
-
-fetch("/api/getSummary")
-.then(response => response.json())
-.then(cartItems => {
-    const cartTable = document.getElementById("cartTable").getElementsByTagName("tbody")[0];
-    let subtotal = 0; // Initialize subtotal
-
-    cartItems.forEach(item => {
-        let row = cartTable.insertRow();
+    
+    // Fetch and display order summary
+    try {
+        const summaryResponse = await fetch("/api/getSummary", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include' // Important for authentication
+        });
         
-        // Create image column
-        let imgCell = row.insertCell(0);
-        imgCell.innerHTML = `<img src="images/${item.image}" alt= ${item.itemName}>`;
+        if (!summaryResponse.ok) {
+            throw new Error(`API error: ${summaryResponse.status}`);
+        }
+        
+        const cartItems = await summaryResponse.json();
+        const cartTable = document.getElementById("cartTable").getElementsByTagName("tbody")[0];
+        let subtotal = 0; // Initialize subtotal
+        
+        // Clear existing table rows if any
+        cartTable.innerHTML = "";
 
-        // Product name column
-        let nameCell = row.insertCell(1);
-        nameCell.innerHTML = `<h1 class="productName">${item.itemName}</h1>`;
+        cartItems.forEach(item => {
+            let row = cartTable.insertRow();
+            
+            // Create image column
+            let imgCell = row.insertCell(0);
+            imgCell.innerHTML = `<img src="images/${item.image}" alt="${item.itemName}">`;
 
-        // Price column
-        let priceCell = row.insertCell(2);
-        priceCell.innerHTML = `<p class="price">${parseFloat(item.itemPrice).toLocaleString()} Ft</p>`;
+            // Product name column
+            let nameCell = row.insertCell(1);
+            nameCell.innerHTML = `<h1 class="productName">${item.itemName}</h1>`;
+            
+            // Quantity column
+            let quantityCell = row.insertCell(2);
+            quantityCell.innerHTML = `<p class="quantity">${item.quantity}</p>`;
 
-        // Add item price to subtotal (ensure it's a number)
-        subtotal += parseFloat(item.itemPrice) || 0;
-    });
+            // Price column
+            let priceCell = row.insertCell(3);
+            priceCell.innerHTML = `<p class="price">${parseFloat(item.itemPrice).toLocaleString()} Ft</p>`;
+            
+            // Item total column (price × quantity)
+            let itemTotalCell = row.insertCell(4);
+            const itemTotal = parseFloat(item.itemPrice) * item.quantity;
+            itemTotalCell.innerHTML = `<p class="itemTotal">${itemTotal.toLocaleString()} Ft</p>`;
 
-    const deliveryFee = 1490;
-    const totalPrice = subtotal + deliveryFee;
+            // Add item total to subtotal
+            subtotal += itemTotal;
+        });
 
-    // Update price display
-    document.getElementById("subtotal").textContent = subtotal.toLocaleString();
-    document.getElementById("total").textContent = `Végösszeg: ${totalPrice.toLocaleString()} Ft`;
-})
-.catch(error => console.error("Error fetching cart items:", error));
+        const deliveryFee = 1490;
+        const totalPrice = subtotal + deliveryFee;
+
+        // Update price display
+        document.getElementById("subtotal").textContent = subtotal.toLocaleString();
+        document.getElementById("deliveryFee").textContent = deliveryFee.toLocaleString();
+        document.getElementById("total").textContent = `Végösszeg: ${totalPrice.toLocaleString()} Ft`;
+        
+        // Handle empty cart
+        const emptyCartMessage = document.getElementById("emptyCartMessage");
+        const summaryContainer = document.getElementById("summaryContainer");
+        
+        if (cartItems.length === 0 && emptyCartMessage && summaryContainer) {
+            emptyCartMessage.style.display = "block";
+            summaryContainer.style.display = "none";
+        } else if (emptyCartMessage && summaryContainer) {
+            emptyCartMessage.style.display = "none";
+            summaryContainer.style.display = "block";
+        }
+    } catch (error) {
+        console.error("Error fetching order summary:", error);
+        
+        // Display error message to user
+        const errorMessage = document.createElement("div");
+        errorMessage.className = "error-message";
+        errorMessage.textContent = "Nem sikerült betölteni a rendelés adatait. Kérjük, próbáld újra később.";
+        
+        const cartTable = document.getElementById("cartTable");
+        if (cartTable) {
+            cartTable.parentNode.insertBefore(errorMessage, cartTable);
+        }
+    }
+});
