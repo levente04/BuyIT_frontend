@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 
-fetch("/api/cart/getItems")
+fetch("/api/getSummary")
 .then(response => response.json())
 .then(cartItems => {
     const cartTable = document.getElementById("cartTable").getElementsByTagName("tbody")[0];
