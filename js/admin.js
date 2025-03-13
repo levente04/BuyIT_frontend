@@ -25,6 +25,10 @@ btnusers.addEventListener('click', () => {
     window.location.href = './admin_users.html'
 })
 
+btnorders.addEventListener('click', () => {
+    window.location.href = './admin_orders.html'
+})
+
 btnaddproduct.addEventListener('click', () => {
     window.location.href = './addItem.html'
 })
