@@ -34,7 +34,7 @@ function fetchOrders() {
                 <td>${order.order_date}</td>
                 <td>${order.postcode}, ${order.city}, ${order.address}</td>
                 <td>${order.tel}</td>
-                <td><button onclick="deleteOrder(${order.order_id})">Rendelés törlése</button></td>
+                <td><button onclick="deleteOrder(${order.order_id})" id="btndelete">Rendelés törlése</button></td>
             `;
 
             tableBody.appendChild(row);
