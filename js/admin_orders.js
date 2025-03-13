@@ -34,28 +34,49 @@ function fetchOrders() {
                 <td>${order.order_date}</td>
                 <td>${order.postcode}, ${order.city}, ${order.address}</td>
                 <td>${order.tel}</td>
-                <td><button onclick="deleteOrder(${order.order_id})" id="btndelete">Rendelés törlése</button></td>
+                <td><button class="delete-btn" data-id="${order.order_id}">Rendelés törlése</button></td>
             `;
 
             tableBody.appendChild(row);
+        });
+
+        // Attach event listeners to delete buttons after table is populated
+        document.querySelectorAll(".delete-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                const orderId = this.getAttribute("data-id");
+                deleteOrder(orderId);
+            });
         });
     })
     .catch(error => console.error("Hiba a rendelési adatok lekérdezésekor:", error));
 }
 
 function deleteOrder(orderId) {
-    if (!confirm("Biztosan törölni szeretné ezt a rendelést?")) return;
-
-    fetch(`/api/deleteOrder/${orderId}`, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
+    Swal.fire({
+        title: "Biztos törölni szeretné?",
+        text: "Ez a művelet nem visszavonható!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Igen, törlöm!",
+        cancelButtonText: "Mégse"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`/api/deleteOrder/${orderId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                Swal.fire("Törölve!", "A rendelés sikeresen törölve lett.", "success")
+                .then(() => fetchOrders()); // Refresh the table after deletion
+            })
+            .catch(() => {
+                Swal.fire("Hiba!", "Nem sikerült törölni a rendelést.", "error");
+            });
         }
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message || "Rendelés törölve!");
-        fetchOrders(); // Refresh the table after deletion
-    })
-    .catch(error => console.error("Hiba a rendelés törlésekor:", error));
+    });
 }
