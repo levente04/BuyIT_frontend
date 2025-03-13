@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 
-fetch("/api/cart/getItems")
+fetch("/api/orderedItems")
 .then(response => response.json())
 .then(cartItems => {
     const cartTable = document.getElementById("cartTable").getElementsByTagName("tbody")[0];
@@ -151,3 +151,33 @@ fetch("/api/cart/getItems")
     document.getElementById("total").textContent = `Végösszeg: ${totalPrice.toLocaleString()} Ft`;
 })
 .catch(error => console.error("Error fetching cart items:", error));
+
+async function loadLatestOrder() {
+    try {
+        const response = await fetch('/api/getSummary', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token') // If you use JWT
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Hiba a rendelés betöltésekor');
+        }
+
+        const data = await response.json();
+        if (data.error) {
+            document.getElementById('orderAddress').innerText = 'Nincs rendelés';
+            return;
+        }
+
+        // Insert the fetched data into the paragraph
+        document.getElementById('orderAddress').innerText = `${data.city}, ${data.address}, ${data.postcode}`;
+    } catch (error) {
+        console.error(error);
+        document.getElementById('orderAddress').innerText = 'Hiba történt';
+    }
+}
+
+// Call the function when the page loads
+loadLatestOrder();
