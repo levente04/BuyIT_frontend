@@ -127,7 +127,9 @@ nav a {
     margin: 40px;
 }
 
-
+table {
+    margin-top: 20px;
+}
 
 
 @media screen  and (max-width: 1210px) {
