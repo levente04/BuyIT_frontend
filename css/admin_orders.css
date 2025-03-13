@@ -133,6 +133,9 @@ table {
     font-size: 2rem;
     border-radius: 10px;
 }
+th {
+    border-style: solid;
+}
 
 #cimsor {
     color: purple;
