@@ -118,11 +118,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 
-<<<<<<< HEAD:js/orderSummery.js
 fetch("/api/getSummary")
-=======
-fetch("/api/orderedItems")
->>>>>>> 8062ea53de1fae9bd5d9ca90668a880143e8f9e0:js/orderSummary.js
 .then(response => response.json())
 .then(cartItems => {
     const cartTable = document.getElementById("cartTable").getElementsByTagName("tbody")[0];
