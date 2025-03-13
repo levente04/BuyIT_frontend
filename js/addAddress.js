@@ -149,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = {
             city: document.getElementById("city").value.trim(),
             address: document.getElementById("address").value.trim(),
+            note: document.getElementById("note").value.trim(),
             postcode: document.getElementById("postCode").value.trim(),
             tel: document.getElementById("tel").value.trim()
         };
