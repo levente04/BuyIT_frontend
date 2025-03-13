@@ -24,7 +24,7 @@ laptops.addEventListener('click', () => {
 })
 
 proceedToPay.addEventListener('click', () => {
-    window.location.href = './orderSummery.html'
+    window.location.href = './orderSummary.html'
 })
 
 backToAddress.addEventListener('click', () => {

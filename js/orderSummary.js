@@ -118,7 +118,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 
+<<<<<<< HEAD:js/orderSummery.js
 fetch("/api/getSummary")
+=======
+fetch("/api/orderedItems")
+>>>>>>> 8062ea53de1fae9bd5d9ca90668a880143e8f9e0:js/orderSummary.js
 .then(response => response.json())
 .then(cartItems => {
     const cartTable = document.getElementById("cartTable").getElementsByTagName("tbody")[0];
@@ -151,3 +155,33 @@ fetch("/api/getSummary")
     document.getElementById("total").textContent = `Végösszeg: ${totalPrice.toLocaleString()} Ft`;
 })
 .catch(error => console.error("Error fetching cart items:", error));
+
+async function loadLatestOrder() {
+    try {
+        const response = await fetch('/api/getSummary', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text(); // Read full response
+            throw new Error(`Hiba a rendelés betöltésekor: ${errorText}`);
+        }
+
+        const data = await response.json();
+        if (data.error) {
+            document.getElementById('orderAddress').innerText = 'Nincs rendelés';
+            return;
+        }
+
+        document.getElementById('orderAddress').innerText = `${data.city}, ${data.address}, ${data.postcode}`;
+    } catch (error) {
+        console.error("Load Latest Order Error:", error);
+        document.getElementById('orderAddress').innerText = 'Hiba történt';
+    }
+}
+
+// Call function on page load
+loadLatestOrder();
