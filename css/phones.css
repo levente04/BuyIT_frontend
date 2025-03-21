@@ -17,16 +17,17 @@ body {
     margin: 20px;
     text-shadow: 15px 10px black;
 }
+
 header {
     background-color: white;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 1000;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
+    padding: 10px;
     gap: 10px;
 }
 
@@ -72,9 +73,9 @@ header {
 
 .search-container input[type=text] {
     padding: 6px 10px;
-    margin: 0;
-    width: 450px;
-    font-size: 30px;
+    font-size: 18px;
+    width: 100%;
+    max-width: 400px;
     background-color: #C0C0C0;
     border: none;
     border-radius: 10px;
@@ -82,10 +83,10 @@ header {
 
 .search-container button {
     padding: 6px 10px;
-    margin: 0;
+    margin-left: 5px;
     background-color: purple;
     color: white;
-    font-size: 30px;
+    font-size: 18px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -168,7 +169,7 @@ nav a {
 
 .container {
     width: 100%;
-    max-width: 1800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 10px;
 }
@@ -177,19 +178,17 @@ nav a {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .card {
-    flex: 0 1 calc((100% - 40px) / 5);
+    flex: 0 1 calc((100% - 20px) / 4);
     background-color: hsl(285, 15%, 16%);
     border: solid 3px;
     border-radius: 20px;
-    box-shadow: 0 2px 4px rgb(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    transition: ease 500ms;
+    transition: ease 300ms;
 }
 
 .card:hover {
@@ -309,13 +308,13 @@ nav a {
 
 @media screen and (max-width: 1200px) {
     .card {
-        flex: 0 1 calc((100% - 30px) / 4);
+        flex: 0 1 calc((100% - 15px) / 3);
     }
 }
 
 @media screen and (max-width: 992px) {
     .card {
-        flex: 0 1 calc((100% - 20px) / 3);
+        flex: 0 1 calc((100% - 10px) / 2);
     }
 }
 
