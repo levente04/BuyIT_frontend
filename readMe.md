@@ -57,8 +57,4 @@ frontend/
 │   └── login.css
 ```
 
-## Kapcsolat backenddel
-
-A JavaScript fájlok API-hívásokat kezdeményeznek (nem látható itt, de valószínűleg REST endpointokra). Feltételezhetően a backend szolgáltatja a termékeket, bejelentkezést és egyéb adatokat.
-
 ---
